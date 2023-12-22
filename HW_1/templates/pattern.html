@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content__block">
+  <h2 class="content__title">{{ title }}</h2>
+  <div class="cards__wrapper">
+    <div class="catalog__items-wrapper">
+      {% for value in catalog %}
+      <div class="card__wrapper">
+        <p class="card__content">{{ value }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock %}
