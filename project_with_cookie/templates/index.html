@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+
+    <h3 class="section__person-title content__title">Введите ваше имя и email</h3>
+      <form class="section__person-form" method="POST">
+
+        <div class="section__person-form-wrapper">
+          <label class="section__person-form-title" for="username">Введите ваше имя</label>
+          <input class="section__person-form-input section__input" type="text" placeholder="Введите ваше имя" id="username" name="username">
+        </div>
+
+        <div class="section__person-form-wrapper">
+          <label class="section__person-form-title" for="email">Введите email</label>
+          <input class="section__person-form-input section__input" type="email" placeholder="Введите email" id="email" name="email">
+        </div>
+        <button class="section__button" type="submit">Отправить данные</button>
+        
+      </form>
+  </div>
+</section>
+{% endblock %}
+

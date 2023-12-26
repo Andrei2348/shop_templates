@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <form class="section__person-form" method="POST" action="/welcome/">
+      <h1 class="content__title">Добро пожаловать {{ username }}</h1>
+      <button class="section__button" type="submit">Выйти</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
