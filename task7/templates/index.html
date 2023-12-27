@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+
+    <h3 class="section__person-title content__title">Введите число</h3>
+      <form class="section__person-form" method="POST">
+
+        <div class="section__person-form-wrapper">
+          <label class="section__person-form-title" for="username">Введите число</label>
+          <input class="section__person-form-input section__input" type="number" placeholder="Введите число" id="numb" name="numb">
+        </div>
+
+        <button class="section__button" type="submit">Отправить данные</button>
+        
+      </form>
+  </div>
+</section>
+{% endblock %}
+
