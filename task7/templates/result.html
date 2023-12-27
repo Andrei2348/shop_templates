@@ -2,12 +2,13 @@
 
 {% block content %}
 <section class="section">
-  <div class="container">
-    <form class="section__person-form" method="POST" action="/welcome/">
-      <h1 class="content__title">Добро пожаловать {{ username }}</h1>
-      {{ value }}
-      <button class="section__button" type="submit">Выйти</button>
-    </form>
-  </div>
+    <div class="container">
+        <div class="content__wrapper">
+            <h1 class="content__title">Результаты:</h1>
+            <p>Введенное число равно: {{ value[0] }}</p>
+            <p>Квадрат введенного числа равен: {{ value[1] }}</p>
+            <a href="{{ url_for('index') }}" class="section__button">На Главную</a>
+        </div>
+    </div>
 </section>
 {% endblock %}

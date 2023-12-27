@@ -60,6 +60,9 @@ body{
   padding: 0 10px;
 }
 
+.content__wrapper{
+  text-align: center;
+}
 .section{
   background-color: rgb(58, 78, 105);
   height: 100vh;

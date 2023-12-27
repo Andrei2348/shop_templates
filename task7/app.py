@@ -9,33 +9,25 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 import os
 
 
-
 app = Flask(__name__)
 
 # Страница приветствия
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        field = request.form.get('numb')
-        res = make_response(redirect(url_for('result')))
-        res.set_cookie('simpleFlask', field)
-        return res
-    else:
-        flash('Введите корректные данные')
+        value = request.form.get('numb')
+        return redirect(url_for('result', value = value))
     return render_template('index.html', my_title = 'Страница приветствия') 
 
     
 # Страница результатов
 @app.route('/result/')
 def result():
-    value = request.cookies.get('simpleFlask')
-    # request.set_cookie('simpleFlask', 'username', max_age = 0)
-    print(value)
-  
-    
+    value = []
+    numb = int(request.args.get('value', None))
+    value.append(numb)
+    value.append(numb ** 2)
     return render_template('result.html', my_title = 'Страница результатов', value = value)
-
-
 
 
 # Ошибка 404
