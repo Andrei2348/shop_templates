@@ -59,7 +59,7 @@ body{
   margin: 0 auto;
   padding: 0 10px;
 }
-
+.content__text,
 .content__wrapper{
   text-align: center;
 }
@@ -129,12 +129,9 @@ body{
   right: 30px;
 }
 
-/* .flash__message{
-  background-color: rgb(110, 126, 68);
-  color: #1b1818;
-  padding: 40px;
-  position: absolute;
-} */
+.content__inner{
+  text-align: center;
+}
 
 @keyframes flash__animation{
   0%{
