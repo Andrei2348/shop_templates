@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+
+    <h3 class="section__person-title content__title">Введите ваше имя</h3>
+      <form class="section__person-form" method="POST">
+
+        <div class="section__person-form-wrapper">
+          <input class="section__person-form-input section__input" type="text" placeholder="Введите ваше имя" id="username" name="username">
+        </div>
+
+        <button class="section__button" type="submit">Поприветствовать</button>
+        
+      </form>
+  </div>
+</section>
+{% endblock %}
+
