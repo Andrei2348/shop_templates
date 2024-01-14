@@ -33,7 +33,7 @@ def index():
 # Ошибка 404
 @app.errorhandler(404)
 def page_not_found(error):
-  return render_template('404.html', my_title = 'Error')
+    return render_template('404.html', my_title = 'Error')
 
 
 if __name__ == '__main__':
