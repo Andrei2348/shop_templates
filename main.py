@@ -15,10 +15,8 @@ API должен содержать следующие конечные точк
 
 from fastapi import FastAPI
 import logging
-from typing import Optional
 from pydantic import BaseModel
-from fastapi.responses import JSONResponse
-import json
+
 
 
 app = FastAPI()
