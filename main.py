@@ -33,14 +33,14 @@ class Task(BaseModel):
     
 
 
-@app.get("/tasks")
+@app.get("/tasks", response_model=List[Task])
 async def get_all_tasks():
     print(task_list)
     logger.info('Отработал GET запрос на возврат списка всех задач.')
     return task_list
 
 
-@app.get("/tasks/{task_id}")
+@app.get("/tasks/{task_id}", response_model=Task)
 async def get_selected_task(task_id: int):
     for elem in task_list:
         if elem.id == task_id:
