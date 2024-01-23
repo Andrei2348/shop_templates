@@ -1,79 +1,79 @@
-'''Задание
-
-Необходимо создать API для управления списком задач. 
-Каждая задача должна содержать заголовок и описание. 
-Для каждой задачи должна быть возможность указать статус (выполнена/не выполнена).
-
-API должен содержать следующие конечные точки:
-— GET /tasks — возвращает список всех задач.
-— GET /tasks/{id} — возвращает задачу с указанным идентификатором.
-— POST /tasks — добавляет новую задачу.
-— PUT /tasks/{id} — обновляет задачу с указанным идентификатором.
-— DELETE /tasks/{id} — удаляет задачу с указанным идентификатором.
-
-Для каждой конечной точки необходимо проводить валидацию данных запроса и ответа. Для этого использовать библиотеку Pydantic.'''
-
-from fastapi import FastAPI
-import logging
-from pydantic import BaseModel
+from fastapi import FastAPI, Request
+import sqlalchemy
+import databases
+from pydantic import BaseModel, Field
+from typing import List
 
 
+DATABASE_URL = "sqlite:///mydatabase.db"
+database = databases.Database(DATABASE_URL)
+metadata = sqlalchemy.Metadata()
 
 app = FastAPI()
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
-task_list = []
 
-class Task(BaseModel):
+class User(BaseModel):
     id: int
-    title: str
-    description: str
-    status: str
-    
+    firstname: str = Field(max_length=40)
+    lastname: str = Field(max_length=40)
+    email: str = Field(max_length=40)
+    password: str = Field(max_length=40)
+    orders: int = Field(max_length=4)
 
 
-@app.get("/tasks")
-async def get_all_tasks():
-    print(task_list)
-    logger.info('Отработал GET запрос на возврат списка всех задач.')
-    return task_list
+class UserIn(BaseModel):
+    firstname: str = Field(max_length=40)
+    lastname: str = Field(max_length=40)
+    email: str = Field(max_length=40)
+    password: str = Field(max_length=40)
+    orders: int = Field(max_length=4)  
 
 
-@app.get("/tasks/{task_id}")
-async def get_selected_task(task_id: int):
-    for elem in task_list:
-        if elem.id == task_id:
-            logger.info(f'Отработал GET запрос на возврат задачи с идентификатором: {task_id}')
-            return elem 
-    logger.info('GET запрос на возврат задачи с идентификатором отработал с ошибкой')
-    return {"Alarm_message":"В списке задач нет такой задачи"}
+class Products(BaseModel):
+    id: int
+    price: str = Field(max_length=20)
+    title: str = Field(max_length=20)
+    description: str = Field(max_length=200)
 
 
-@app.post("/tasks/")
-async def create_task(task: Task):
-    task_list.append(task)
-    logger.info('Отработал POST запрос. Добавлена новая задача')
-    return task
+class ProductsIn(BaseModel):
+    price: str = Field(max_length=20)
+    title: str = Field(max_length=20)
+    description: str = Field(max_length=200)
 
 
-@app.put("/tasks/{task_id}")
-async def update_task(task_id: int, task:  Task):
-    for index, elem in enumerate(task_list):
-        if elem.id == task_id:
-            task_list[index] = task
-            logger.info(f'Отработал PUT запрос. Обновлена задача с идентификатором: {task_id}.')
-            return {"task_id": task_id, "task": task}
-    logger.info('PUT запрос отработал с ошибкой')
-    return {"Alarm_message":"В списке задач нет такой задачи"}
-   
-    
-@app.delete("/tasks/{task_id}")
-async def delete_item(task_id: int):
-    for index, elem in enumerate(task_list):
-        if elem.id == task_id:
-            task_list.pop(index)
-            logger.info(f'Отработал DELETE запрос для идентификатора: {task_id}.')
-            return {"task_id": task_id}
-    logger.info('DELETE запрос отработал с ошибкой')
-    return {"Alarm_message":"В списке задач нет такой задачи"}
+engine = sqlalchemy.create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+metadata.create_all(engine)
+
+
+@app.post("/users/", response_model=User)
+async def create_user(user: UserIn):
+    query = users.insert().values(**user.model_dump())
+    record_id = await database.execute(query)
+    return{**user.model_dump(), "id": record_id}
+
+
+@app.get("/users/", response_model=List[User])
+async def read_users():
+    query = users.select()
+    return await database.fetch_all(query)
+
+
+@app.get("/users/{user_id}", response_model=User)
+async def read_user(user_id: int):
+    query = users.select().where(users.c.id == user_id)
+    return await database.fetch_one(query)
+
+
+@app.put("/users/{user_id}", response_model=User)
+async def update_user(user_id: int, new_user: UserIn):
+    query = users.update().where(users.c.id ==user_id).values(**new_user)
+    await database.execute(query)
+    return {**new_user, "id": user_id}
+
+
+@app.delete("/users/{user_id}")
+async def delete_user(user_id: int):
+    query = users.delete().where(users.c.id == user_id)
+    await database.execute(query)
+    return {'message': 'User deleted'}
