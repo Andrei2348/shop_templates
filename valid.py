@@ -33,14 +33,14 @@ class ProductsIn(BaseModel):
 
 class Orders(BaseModel):
     id: int
-    date: datetime = Field(...) 
+    date: datetime = Field() 
     status: bool
     users_id: int = Field()
     products_id: int = Field()
 
     
 class OrdersIn(BaseModel):
-    date: datetime = Field(...)
+    date: datetime = Field()
     status: bool
     users_id: int = Field()
     products_id: int = Field()
