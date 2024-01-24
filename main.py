@@ -116,3 +116,6 @@ async def delete_order(order_id: int):
     query = orders.delete().where(orders.c.id == order_id)
     await database.execute(query)
     return {'message': 'Order deleted'}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8001)
