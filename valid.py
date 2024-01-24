@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 
 
-
 class Users(BaseModel):
     id: int
     firstname: str = Field(max_length=40)
@@ -33,14 +32,13 @@ class ProductsIn(BaseModel):
 
 class Orders(BaseModel):
     id: int
-    date: datetime = Field() 
+    date: datetime = None
     status: bool
     users_id: int = Field()
     products_id: int = Field()
 
     
 class OrdersIn(BaseModel):
-    date: datetime = Field()
     status: bool
     users_id: int = Field()
     products_id: int = Field()

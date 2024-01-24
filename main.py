@@ -90,7 +90,11 @@ async def read_orders():
 @app.get("/orders/{order_id}", response_model=Orders)
 async def read_order(order_id: int):
     query = orders.select().where(orders.c.id == order_id)
-    return await database.fetch_one(query)
+    result = await database.fetch_one(query)
+    if result:
+        return Orders(**result)
+    else:
+        raise HTTPException(status_code=404, detail="Заказ не найден")
 
 
 @app.post("/orders/", response_model=Orders)
