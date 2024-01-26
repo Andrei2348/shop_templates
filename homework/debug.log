@@ -1,0 +1,8 @@
+2024-01-26 18:08:03,142 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2024-01-26 18:08:04,847 myapp.views  INFO     Пользователь открыл страницу Index
+2024-01-26 18:08:05,357 django.request WARNING  Not Found: /favicon.ico
+2024-01-26 18:08:22,012 myapp.views  INFO     Пользователь открыл страницу About
+2024-01-26 18:09:07,342 django.utils.autoreload INFO     /home/andrei/projects/shop_templates/homework/homework/settings.py changed, reloading.
+2024-01-26 18:09:07,897 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2024-01-26 18:09:09,180 django.utils.autoreload INFO     /home/andrei/projects/shop_templates/homework/homework/settings.py changed, reloading.
+2024-01-26 18:09:09,762 django.utils.autoreload INFO     Watching for file changes with StatReloader
