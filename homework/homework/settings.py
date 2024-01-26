@@ -28,6 +28,32 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGGING = {
+ 'version': 1,
+ 'disable_existing_loggers': False,
+ 'handlers': {
+ 'console': {
+ 'class': 'logging.StreamHandler',
+ },
+ 'file': {
+ 'class': 'logging.FileHandler',
+ 'filename': '/path/to/django.log',
+ },
+ },
+ 'loggers': {
+ 'django': {
+ 'handlers': ['console', 'file'],
+ 'level': 'INFO',
+ },
+ 'myapp': {
+ 'handlers': ['console'],
+ 'level': 'DEBUG',
+ 'propagate': True,
+ },
+ },
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +63,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'myapp.apps.MyappConfig',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
