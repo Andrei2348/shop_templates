@@ -8,12 +8,11 @@ class Client(models.Model):
     email = models.EmailField(max_length = 254)
     phone = models.CharField(max_length=12)
     address = models.CharField(max_length=120)
-    password = models.CharField(max_length=100)
     date_reg = models.DateField(auto_now_add=True)
-
 
     def __str__(self):
         return self.name
+    
     
 class Products(models.Model):
     '''Модель товара'''
@@ -31,16 +30,18 @@ class Orders(models.Model):
     '''Модель заказа'''
     customer = models.ForeignKey('Client', 
                                 on_delete=models.CASCADE,
-                                related_name='name', 
-                                null='False', 
+                                related_name='username', 
+                                null='True', 
                                 verbose_name='Id клиента')
-    product = models.ForeignKey('Products',
-                                on_delete=models.CASCADE,
-                                related_name='title',
-                                null='False',
+    product = models.ManyToManyField('Products',
+                                related_name='product_title',
                                 verbose_name='Id товара')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date_reg = models.DateField(auto_now=True)
 
-    def __str__(self):
-        return self.product
+#     def __str__(self):
+#         return self.product
+
+    # def save(self, *args, **kwargs):
+
+    #     super().save(*args, **kwargs)
