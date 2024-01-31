@@ -4,10 +4,11 @@ from myapp.models import Client
 
 
 class Command(BaseCommand):
+    help = 'Создание клиентов'
     
     def handle(self, *args, **kwargs):
-        for i in range(0, 5):
-            client = Client(name=f'User_{i+1}',
+        for i in range(1, 5):
+            client = Client(name=f'User_{i}',
                             email=f'user-{i}@example.com',
                             phone=f'+373333333{i}',
                             address=lorem_ipsum.paragraphs(3)[0]

@@ -5,8 +5,10 @@ from random import randint
 
 
 class Command(BaseCommand):
+    help = 'Создание продуктов в таблице бд продуктов'
+
     def handle(self, *args, **kwargs):
-        for i in range(0, 5):
+        for i in range(1, 5):
             products = Products(
                 title=f'Продукт № {i}',
                 description=lorem_ipsum.paragraphs(4)[0],
