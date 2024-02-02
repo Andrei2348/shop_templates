@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,16 +8,21 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <h1>Корзина товаров</h1>
+    <h1>Корзина товаров клиента: {{ username }}</h1>
+
+    {% block nav %}
+    {% include './_nav.html' %}
+    {% endblock %}
+
     <br>
+    <h2>{{ title }}</h2>
     {% for order in orders %}
     <h2>Заказ {{ forloop.counter }}</h2>
         {% for elem in order %}
             <h2>Название продукта: <span>{{ elem.title }}</span></h2>
             <p>Описание продукта: <span>{{ elem.description }}</span></p>
             <p>Стоимость продукта: <span>{{ elem.price }}</span></p>
-        {% endfor %}
-        <p>Итоговая стоимость: <span>{{ forloop.counter }}</span></p>
+            {% endfor %}
         <br>
     {% endfor %}
 </body>
