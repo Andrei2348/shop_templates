@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Корзина товаров</h1>
+    <br>
+    {% for order in orders %}
+    <h2>Заказ {{ forloop.counter }}</h2>
+        {% for elem in order %}
+            <h2>Название продукта: <span>{{ elem.title }}</span></h2>
+            <p>Описание продукта: <span>{{ elem.description }}</span></p>
+            <p>Стоимость продукта: <span>{{ elem.price }}</span></p>
+        {% endfor %}
+        <p>Итоговая стоимость: <span>{{ forloop.counter }}</span></p>
+        <br>
+    {% endfor %}
+</body>
+</html>
