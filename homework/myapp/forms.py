@@ -6,4 +6,5 @@ class ProductCreateForm(forms.Form):
     description = forms.CharField(max_length=200, label='Описание продукта', widget=forms.TextInput(attrs={'class': 'input__form', 'required': True}))
     price = forms.DecimalField(max_digits=10, decimal_places=2, label='Стоимость продукта', widget=forms.NumberInput(attrs={'class': 'input__form', 'required': True}))
     quantity = forms.IntegerField(label='Количество', widget=forms.NumberInput(attrs={'class': 'input__form', 'required': True}))
+    image = forms.ImageField(label='Добавтье изображение')
 
