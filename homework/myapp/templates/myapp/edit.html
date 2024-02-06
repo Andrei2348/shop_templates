@@ -4,11 +4,10 @@
     <h3>{{ message }}</h3>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for each_form in form %}
-            <div>
-                <label for="{{ each_form.id_for_label }}">{{each_form.label}}: </label>
-                {{ each_form }}
-            </div>
+        {% for f in form %}
+        <div>
+            <label for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}
+        </div>
         {% endfor %}
         <input type="submit" value="Отправить">
     </form>

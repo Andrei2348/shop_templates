@@ -1,13 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Orders, Products
 from datetime import date, timedelta
 from .forms import ProductCreateForm
-
-
-def handle_uploaded_file(f):
-    with open(f"./myapp/media/{f.name}", "wb+") as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
 
 
 def create_result(order):
@@ -77,12 +71,13 @@ def create_product(request):
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
             quantity = form.cleaned_data['quantity']
-            # handle_uploaded_file(form.cleaned_data['image'])
-            fp = Products(image=form.cleaned_data['image'])
-            product = Products(title=title, description=description, price=price, quantity=quantity, image=fp)
+            image=form.cleaned_data['image']
+            product = Products(title=title, description=description, price=price, quantity=quantity, image=image)
             product.save()
             message = f'Продукт {title} сохранен'
     else:
         form = ProductCreateForm()
         message = 'Заполните форму'
     return render(request, 'myapp/edit.html', {'form': form, 'message': message})
+
+

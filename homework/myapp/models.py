@@ -19,7 +19,7 @@ class Products(models.Model):
     title = models.CharField(max_length=60, db_index=True)
     description = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.FileField(upload_to='uploads_model')
+    image = models.ImageField(blank=True, upload_to="images")
     quantity = models.IntegerField()
     date_add = models.DateField(auto_now_add=True)
     
