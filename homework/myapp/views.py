@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Orders
+from .models import Orders, Products
 from datetime import date, timedelta
+from forms import ProductCreateForm
 
 
 def create_result(order):
@@ -61,3 +62,23 @@ def cart_year(request, index):
     }
     return render(request, 'myapp/index.html', context=context)
 
+
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductCreateForm(request.POST)
+        if form.is_valid():
+        
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            price = form.cleaned_data['price']
+            quantity = form.cleaned_data['quantity']
+
+
+            product = Products(title=title, description=description, price=price, quantity=quantity)
+            product.save()
+            message = 'Продукт сохранен в БД'
+        else:
+            form = ProductCreateForm()
+            message = 'Заполните форму'
+            return render(request, 'myapp4/edit.html', {'form':
+    form, 'message': message})
