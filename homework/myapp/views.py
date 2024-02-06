@@ -77,9 +77,9 @@ def create_product(request):
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
             quantity = form.cleaned_data['quantity']
-            handle_uploaded_file(form.cleaned_data['image'])
-
-            product = Products(title=title, description=description, price=price, quantity=quantity)
+            # handle_uploaded_file(form.cleaned_data['image'])
+            fp = Products(image=form.cleaned_data['image'])
+            product = Products(title=title, description=description, price=price, quantity=quantity, image=fp)
             product.save()
             message = f'Продукт {title} сохранен'
     else:
