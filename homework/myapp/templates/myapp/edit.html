@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<form action="" method="post">
-{% csrf_token %}
-{{ form }}
-<input type="submit" value="Отправить">
-</form>
+    <h3>{{ message }}</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for each_form in form %}
+            <div>
+                <label for="{{ each_form.id_for_label }}">{{each_form.label}}: </label>
+                {{ each_form }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="Отправить">
+    </form>
 {% endblock %}
