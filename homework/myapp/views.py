@@ -67,17 +67,28 @@ def create_product(request):
     if request.method == 'POST':
         form = ProductCreateForm(request.POST, request.FILES)
         if form.is_valid():
+            # title = form.cleaned_data['title']
+            # description = form.cleaned_data['description']
+            # price = form.cleaned_data['price']
+            # quantity = form.cleaned_data['quantity']
+            # image=form.cleaned_data['image']
+            # product = Products(title=title, description=description, price=price, quantity=quantity, image=image)
+            # product.save()
+            # message = f'Продукт {title} сохранен'
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             price = form.cleaned_data['price']
             quantity = form.cleaned_data['quantity']
             image=form.cleaned_data['image']
             product = Products(title=title, description=description, price=price, quantity=quantity, image=image)
-            product.save()
-            message = f'Продукт {title} сохранен'
-    else:
-        form = ProductCreateForm()
-        message = 'Заполните форму'
-    return render(request, 'myapp/edit.html', {'form': form, 'message': message})
+            product = form.save()
+            message = f'Продукт {product.title} сохранен'
+            return render(request, 'myapp/edit.html', {'form': form, 'message': message})
+    # else:
+    #     form = ProductCreateForm()
+    #     message = 'Заполните форму'
+    # return render(request, 'myapp/edit.html', {'form': form, 'message': message})
+    form = ProductCreateForm()
+    return render(request, 'myapp/edit.html', {'form': form})
 
 
