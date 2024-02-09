@@ -17,7 +17,7 @@ class ClientAdmin(admin.ModelAdmin):
 class ProductsAdmin(admin.ModelAdmin):
     list_display = ('title', 'price', 'quantity', 'date_add')
     list_display_links = ('title',)
-    fields = ['title', 'price', 'quantity']
+    fields = ['title', 'price', 'quantity', 'image']
     ordering = ['date_add', 'title']
     list_per_page = 10
     search_fields = ['title']
@@ -25,7 +25,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
 @admin.register(Orders)
 class OrdersAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'amount',)
+    list_display = ('customer', 'amount')
     list_display_links = ('customer',)
     fields = ['customer', 'product', 'amount']
     ordering = ['date_reg']
