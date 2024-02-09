@@ -20,7 +20,6 @@ def cart(request, index):
     'username': username,
     'orders': order_list
     }
-    
     return render(request, 'myapp/index.html', context=context)
 
 
