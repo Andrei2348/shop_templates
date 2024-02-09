@@ -1,0 +1,7 @@
+{% load static %}
+<ul>
+    <li><a href="{% url 'cart' username.pk %}">Все заказы</a></li>
+    <li><a href="{% url 'cart_week' username.pk %}">За неделю</a></li>
+    <li><a href="{% url 'cart_mounth' username.pk %}">За месяц</a></li>
+    <li><a href="{% url 'cart_year' username.pk %}">За год</a></li>
+</ul>
