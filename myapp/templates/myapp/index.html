@@ -3,11 +3,6 @@
 
 {% block content %}
     <h1>Корзина товаров клиента: {{ username }}</h1>
-
-    {% block nav %}
-    {% include './_nav.html' %}
-    {% endblock %}
-
     <br>
     <h2>{{ title }}</h2>
     {% for order in orders %}

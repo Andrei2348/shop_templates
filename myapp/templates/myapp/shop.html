@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% block nav %}
+    {% include './_nav.html' %}
+    {% endblock %}
+    
+    <h1>Добро пожаловать в магазин</h1>
+
+    <br>
+    <h2>{{ title }}</h2>
+    
+    {% for product in products %}
+       <p>Название продукта: {{ product.title }}</p>
+       <p>Описание продукта: {{ product.description}}</p>
+       <p>Цена продукта: {{ product.price }}</p>
+        <br>
+    {% endfor %}
+{% endblock %}

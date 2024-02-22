@@ -12,6 +12,7 @@ def create_result(order):
     return order_list, username
 
 
+
 def cart(request, index):
     order = Orders.objects.filter(customer = index)
     order_list, username = create_result(order)
@@ -79,4 +80,10 @@ def create_product(request):
         message = 'Заполните форму'
     return render(request, 'myapp/edit.html', {'form': form, 'message': message})
 
-
+def shop(request):
+    products = Products.objects.all()
+    context = {
+    'title': 'Все товары',
+    'products': products
+    }
+    return render(request, 'myapp/shop.html', context=context)
