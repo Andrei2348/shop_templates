@@ -2,8 +2,13 @@
 {% load static %}
 
 {% block content %}
+    {% block nav %}
+    {% include './_nav.html' %}
+    {% endblock %}
+
     <h1>Корзина товаров клиента: {{ username }}</h1>
     <br>
+
     <h2>{{ title }}</h2>
     {% for order in orders %}
     <h2>Заказ {{ forloop.counter }}</h2>
